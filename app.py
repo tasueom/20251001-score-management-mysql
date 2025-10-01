@@ -40,10 +40,11 @@ def signin():
         if check:
             flash("로그인 성공")
             session["sid"] = sid
+            page = "index.html"
         else:
             flash("로그인 실패")
             return redirect(url_for("signin"))
-        return ren("index.html", sid = session.get("sid"))
+        return ren(page, sid = session.get("sid"))
     return ren("signin.html")
 
 #Flask 서버 실행
