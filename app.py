@@ -23,6 +23,7 @@ def signup():
         try:
             db.signup(sid,ban,sname,hashed_pw)
         except:
+            flash("이미 존재하는 학번입니다.")
             return redirect(url_for("signup"))
         return redirect(url_for("signin"))
     return ren("signup.html")
