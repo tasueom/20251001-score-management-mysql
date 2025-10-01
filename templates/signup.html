@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>회원가입</h2>
-<form method="post">
+<form method="post" onsubmit="return checkSignUp(this)">
     학번: 
     <input type="text" name="sid" required><br>
     반: 
