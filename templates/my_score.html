@@ -34,4 +34,7 @@
         <td>{{score[6]}}</td>
     </tr>
 </table>
+<form action="{{url_for('update_score')}}">
+    <button type="submit">수정</button>
+</form>
 {% endblock %}

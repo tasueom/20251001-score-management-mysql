@@ -82,6 +82,24 @@ def insert_score():
         return ren("my_score.html", score=score, sid=sid)
     return ren("insert_score.html", sid = sid)
 
+#성적 수정
+@app.route("/update_score", methods=['GET','POST'])
+def update_score():
+    sid = session.get("sid")
+    if request.method == "POST":
+        kor = int(request.form["kor"])
+        eng = int(request.form["eng"])
+        mat = int(request.form["mat"])
+        tot, avg, grade = calculate(kor, eng, mat)
+        
+        db.update_score(sid, kor, eng, mat, tot, avg, grade)
+        
+        flash("성적이 수정되었습니다.")
+        score = db.get_score(sid)
+        return ren("my_score.html", score=score, sid=sid)
+    score = db.get_score(sid)
+    return ren("update_score.html", score=score, sid=sid)
+
 def calculate(kor, eng, mat):
     tot = kor+eng+mat
     avg = round(tot/3,2)

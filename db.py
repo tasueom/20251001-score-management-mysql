@@ -82,6 +82,7 @@ def get_score(sid):
     
     return result
 
+# 성적 삽입
 def insert_score(sid, kor, eng, mat, tot, avg, grade):
     conn, cur = conn_db()
     cur.execute("""
@@ -91,3 +92,18 @@ def insert_score(sid, kor, eng, mat, tot, avg, grade):
     conn.commit()
     conn.close()
 
+# 성적 수정
+def update_score(sid, kor, eng, mat, tot, avg, grade):
+    conn, cur = conn_db()
+    cur.execute("""
+                update scores set
+                kor = %s,
+                eng = %s,
+                mat = %s,
+                tot = %s,
+                average = %s,
+                grade = %s
+                where sid = %s
+                """,(kor, eng, mat, tot, avg, grade, sid))
+    conn.commit()
+    conn.close()
