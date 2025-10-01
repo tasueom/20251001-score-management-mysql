@@ -85,15 +85,9 @@ def get_score(sid):
 def insert_score(sid, kor, eng, mat, tot, avg, grade):
     conn, cur = conn_db()
     cur.execute("""
-                insert into scores values(
-                    sid = %s,
-                    kor = %s,
-                    eng = %s,
-                    mat = %s,
-                    tot = %s,
-                    average = %s,
-                    grade = %s
-                )
-                """,(sid, kor, eng, mat, tot, avg, grade))
+        INSERT INTO scores (sid, kor, eng, mat, tot, average, grade)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
+    """, (sid, kor, eng, mat, tot, avg, grade))
     conn.commit()
     conn.close()
+
