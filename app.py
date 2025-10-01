@@ -66,6 +66,38 @@ def my_score():
         page = "insert_score.html"
     return ren(page, score=score)
 
+# 성적 입력
+@app.route("/insert_score", methods=['GET','POST'])
+def insert_score():
+    sid = session.get("sid")
+    if request.method == "POST":
+        kor = int(request.form["kor"])
+        eng = int(request.form["eng"])
+        mat = int(request.form["mat"])
+        tot, avg, grade = calculate(kor, eng, mat)
+        
+        db.insert_score(sid, kor, eng, mat, tot, avg, grade)
+        
+        flash("성적이 입력되었습니다.")
+        return ren("my_score.html", sid=sid)
+    return ren("insert_score.html", sid = sid)
+
+def calculate(kor, eng, mat):
+    tot = kor+eng+mat
+    avg = round(tot/3,2)
+    match int(avg//10):
+        case 10|9:
+            grade = "A"
+        case 8:
+            grade = "B"
+        case 7:
+            grade = "C"
+        case 6:
+            grade = "D"
+        case _:
+            grade = "F"
+    return tot, avg, grade
+
 #Flask 서버 실행
 if __name__ == "__main__":
     db.init_db()

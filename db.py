@@ -70,6 +70,7 @@ def signin_check(sid, hashed_pw):
     
     return result
 
+# 학번으로 성적 조회
 def get_score(sid):
     conn, cur = conn_db()
     cur.execute("""
@@ -80,3 +81,19 @@ def get_score(sid):
     conn.close()
     
     return result
+
+def insert_score(sid, kor, eng, mat, tot, avg, grade):
+    conn, cur = conn_db()
+    cur.execute("""
+                insert into scores values(
+                    sid = %s,
+                    kor = %s,
+                    eng = %s,
+                    mat = %s,
+                    tot = %s,
+                    average = %s,
+                    grade = %s
+                )
+                """,(sid, kor, eng, mat, tot, avg, grade))
+    conn.commit()
+    conn.close()
