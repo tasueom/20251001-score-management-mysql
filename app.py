@@ -61,7 +61,9 @@ def my_score():
     score = db.get_score(sid)
     if score:
         page = "my_score.html"
-    
+    else:
+        flash("입력된 성적이 없습니다. 성적 입력 화면으로 이동합니다.")
+        page = "insert_score.html"
     return ren(page, score=score)
 
 #Flask 서버 실행
