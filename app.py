@@ -57,6 +57,9 @@ def signout():
 @app.route("/my_score")
 def my_score():
     sid = session.get("sid")
+    if not sid:
+        flash("로그인 후 이용해주세요")
+        return redirect(url_for("signin"))
     
     score = db.get_score(sid)
     if score:
