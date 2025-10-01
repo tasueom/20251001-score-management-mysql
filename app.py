@@ -63,7 +63,7 @@ def my_score():
     
     score = db.get_score(sid)
     if score:
-        return ren("my_score.html", score=score)
+        return ren("my_score.html", score=score, sid=sid)
     else:
         flash("입력된 성적이 없습니다. 성적 입력 화면으로 이동합니다.")
         return redirect(url_for("insert_score"))
