@@ -48,3 +48,15 @@ def init_db():
                 """)
     conn.commit()
     conn.close()
+
+# 회원가입
+def signup(sid, ban, sname, hashed_pw):
+    conn, cur = conn_db()
+    try:
+        cur.execute("""
+                    insert into students(sid, ban, sname, password) 
+                    values(%s, %s, %s, %s)
+                    """,(sid, ban, sname, hashed_pw))
+        conn.commit()
+    finally:
+        conn.close()
