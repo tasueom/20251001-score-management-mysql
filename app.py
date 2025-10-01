@@ -81,8 +81,7 @@ def insert_score():
         db.insert_score(sid, kor, eng, mat, tot, avg, grade)
         
         flash("성적이 입력되었습니다.")
-        score = db.get_score(sid)
-        return ren("my_score.html", score=score, sid=sid)
+        return redirect(url_for("my_score"))
     return ren("insert_score.html", sid = sid)
 
 #성적 수정
