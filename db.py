@@ -27,15 +27,15 @@ def init_db():
     # 생성된 DB에 접속해서 테이블 생성
     conn, cur = conn_db()
     cur.execute("""
-                create table students(
-                    sid varchar(20),
+                create table if not exists students(
+                    sid varchar(20) primary key,
                     ban int,
                     sname varchar(40),
                     password varchar(200)
                 )
                 """)
     cur.execute("""
-                create table scores(
+                create table if not exists scores(
                     sid varchar(20),
                     kor int,
                     eng int,
