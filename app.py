@@ -28,6 +28,23 @@ def signup():
         return redirect(url_for("signin"))
     return ren("signup.html")
 
+#로그인
+@app.route("/signin", methods=['GET','POST'])
+def signin():
+    if request.method == "POST":
+        sid = request.form["sid"]
+        password = request.form["password"]
+        hashed_pw = hashlib.sha256(password.encode()).hexdigest()
+        
+        check = db.signin_check(sid, hashed_pw)
+        if check:
+            flash("로그인 성공")
+        else:
+            flash("로그인 실패")
+            return redirect(url_for("signin"))
+        return ren("index.html", sid = session.get("sid"))
+    return ren("signin.html")
+
 #Flask 서버 실행
 if __name__ == "__main__":
     db.init_db()

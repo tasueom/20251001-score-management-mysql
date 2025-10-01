@@ -60,3 +60,12 @@ def signup(sid, ban, sname, hashed_pw):
         conn.commit()
     finally:
         conn.close()
+
+# 로그인 판별
+def signin_check(sid, hashed_pw):
+    conn, cur = conn_db()
+    cur.execute("select sid from students where sid=%s and password=%s",(sid, hashed_pw))
+    result = cur.fetchone()
+    conn.close()
+    
+    return result
