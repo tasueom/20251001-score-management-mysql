@@ -39,6 +39,7 @@ def signin():
         check = db.signin_check(sid, hashed_pw)
         if check:
             flash("로그인 성공")
+            session["sid"] = sid
         else:
             flash("로그인 실패")
             return redirect(url_for("signin"))
