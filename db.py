@@ -69,3 +69,14 @@ def signin_check(sid, hashed_pw):
     conn.close()
     
     return result
+
+def get_score(sid):
+    conn, cur = conn_db()
+    cur.execute("""
+                select * from scores
+                where sid = %s
+                """,(sid,))
+    result = cur.fetchone()
+    conn.close()
+    
+    return result

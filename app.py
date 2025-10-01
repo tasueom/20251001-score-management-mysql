@@ -53,6 +53,17 @@ def signout():
     session.clear()
     return redirect(url_for("index"))
 
+# 본인 성적 조회
+@app.route("/my_score")
+def my_score():
+    sid = session.get("sid")
+    
+    score = db.get_score(sid)
+    if score:
+        page = "my_score.html"
+    
+    return ren(page, score=score)
+
 #Flask 서버 실행
 if __name__ == "__main__":
     db.init_db()
