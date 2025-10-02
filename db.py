@@ -121,3 +121,18 @@ def get_all_scores():
     conn.close()
     
     return result
+
+#통계 선택
+def get_stats():
+    conn, cur = conn_db()
+    cur.execute("""
+                select
+                round(avg(average), 2),
+                max(average),
+                min(average)
+                from scores
+                """)
+    result = cur.fetchone()
+    conn.close()
+    
+    return result

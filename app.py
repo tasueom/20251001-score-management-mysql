@@ -105,8 +105,9 @@ def update_score():
 @app.route("/score_list")
 def score_list():
     scores = db.get_all_scores()
+    stats = db.get_stats()
     
-    return ren("score_list.html", scores=scores, sid = session.get("sid"))
+    return ren("score_list.html", scores=scores, stats=stats, sid = session.get("sid"))
 
 def calculate(kor, eng, mat):
     tot = kor+eng+mat

@@ -3,8 +3,21 @@
 {% block title %}성적 목록 조회{% endblock %}
 
 {% block content %}
-<h2>성적 목록 조회</h2>
 {% if scores %}
+<h2>전체 통계</h2>
+<table>
+    <tr>
+        <th>평균</th>
+        <th>최고</th>
+        <th>최저</th>
+    </tr>
+    <tr>
+        <td>{{stats[0]}}</td>
+        <td>{{stats[1]}}</td>
+        <td>{{stats[2]}}</td>
+    </tr>
+</table>
+<h2>성적 목록 조회</h2>
 <table>
     <tr>
         <th>학번</th>
