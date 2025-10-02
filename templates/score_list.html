@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}성적 목록 조회{% endblock %}
+
+{% block content %}
+<h2>성적 목록 조회</h2>
+{% if scores %}
+<table>
+    <tr>
+        <th>학번</th>
+        <th>반</th>
+        <th>이름</th>
+        <th>국어</th>
+        <th>영어</th>
+        <th>수학</th>
+        <th>총점</th>
+        <th>평균</th>
+        <th>학점</th>
+    </tr>
+    {% for s in scores %}
+    <tr>
+        <td>{{s[0]}}</td>
+        <td>{{s[1]}}</td>
+        <td>{{s[2]}}</td>
+        <td>{{s[3]}}</td>
+        <td>{{s[4]}}</td>
+        <td>{{s[5]}}</td>
+        <td>{{s[6]}}</td>
+        <td>{{s[7]}}</td>
+        <td>{{s[8]}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

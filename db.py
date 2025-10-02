@@ -107,3 +107,17 @@ def update_score(sid, kor, eng, mat, tot, avg, grade):
                 """,(kor, eng, mat, tot, avg, grade, sid))
     conn.commit()
     conn.close()
+
+# 전체 성적 조회
+def get_all_scores():
+    conn, cur = conn_db()
+    cur.execute("""
+                select s.sid, s.ban, s.sname, c.kor, c.eng, c.mat, c.tot, c.average, c.grade
+                from scores c
+                join students s on s.sid = c.sid
+                order by s.sid asc
+                """)
+    result = cur.fetchall()
+    conn.close()
+    
+    return result

@@ -101,6 +101,13 @@ def update_score():
     score = db.get_score(sid)
     return ren("update_score.html", score=score, sid=sid)
 
+# 성적 목록 조회
+@app.route("/score_list")
+def score_list():
+    scores = db.get_all_scores()
+    
+    return ren("score_list.html", scores=scores, sid = session.get("sid"))
+
 def calculate(kor, eng, mat):
     tot = kor+eng+mat
     avg = round(tot/3,2)
