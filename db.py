@@ -122,6 +122,21 @@ def get_all_scores():
     
     return result
 
+# 특정 반 성적 조회
+def get_ban_scores(ban):
+    conn, cur = conn_db()
+    cur.execute("""
+                select s.sid, s.ban, s.sname, c.kor, c.eng, c.mat, c.tot, c.average, c.grade
+                from scores c
+                join students s on s.sid = c.sid
+                where s.ban = %s
+                order by s.sid asc
+                """,(ban,))
+    result = cur.fetchall()
+    conn.close()
+    
+    return result
+
 #통계 선택
 def get_stats():
     conn, cur = conn_db()
@@ -132,6 +147,24 @@ def get_stats():
                 min(average)
                 from scores
                 """)
+    result = cur.fetchone()
+    conn.close()
+    
+    return result
+
+#반 통계 선택
+def get_stats_ban(ban):
+    conn, cur = conn_db()
+    cur.execute("""
+                select
+                round(avg(average), 2),
+                max(average),
+                min(average)
+                from scores c
+                join students s on c.sid = s.sid
+                where s.ban = %s
+                group by s.ban
+                """,(ban,))
     result = cur.fetchone()
     conn.close()
     

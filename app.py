@@ -104,10 +104,15 @@ def update_score():
 # 성적 목록 조회
 @app.route("/score_list")
 def score_list():
-    scores = db.get_all_scores()
-    stats = db.get_stats()
+    ban = request.args.get("ban","0")
+    if ban == "0":
+        scores = db.get_all_scores()
+        stats = db.get_stats()
+    else:
+        scores = db.get_ban_scores(ban)
+        stats = db.get_stats_ban(ban)
     
-    return ren("score_list.html", scores=scores, stats=stats, sid = session.get("sid"))
+    return ren("score_list.html",ban=ban, scores=scores, stats=stats, sid = session.get("sid"))
 
 def calculate(kor, eng, mat):
     tot = kor+eng+mat

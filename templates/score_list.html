@@ -4,8 +4,19 @@
 
 {% block content %}
 <h2>전체 성적 조회</h2>
+<form action="{{url_for('score_list')}}">
+    <select name="ban">
+        <option value="0" {% if ban=="0" %}selected{% endif %}>전체</option>
+        <option value="1" {% if ban=="1" %}selected{% endif %}>1반</option>
+        <option value="2" {% if ban=="2" %}selected{% endif %}>2반</option>
+        <option value="3" {% if ban=="3" %}selected{% endif %}>3반</option>
+        <option value="4" {% if ban=="4" %}selected{% endif %}>4반</option>
+        <option value="5" {% if ban=="5" %}selected{% endif %}>5반</option>
+    </select>
+    <button type="submit">조회</button>
+</form>
 {% if scores %}
-<h3>전체 통계</h3>
+<h3>{{ "전체" if ban=="0" else ban~"반" }} 통계</h3>
 <table>
     <tr>
         <th>평균</th>
@@ -18,7 +29,7 @@
         <td>{{stats[2]}}</td>
     </tr>
 </table>
-<h3>성적 목록</h3>
+<h3>{{ "전체" if ban=="0" else ban~"반" }} 성적 목록</h3>
 <table>
     <tr>
         <th>학번</th>
