@@ -8,7 +8,7 @@ app.secret_key = "dev_key123"
 #실행 시
 @app.route("/")
 def index():
-    return ren("index.html", sno=session.get("sno"))
+    return ren("index.html", sid=session.get("sid"))
 
 #회원가입
 @app.route("/signup", methods=['GET','POST'])
